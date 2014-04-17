@@ -1,0 +1,130 @@
+<!-- Robin Giles Ribera 2013 -->
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Redes</title>
+    <link href="css/jquery-ui.css" rel="stylesheet">
+    <link href="css/openlayers.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/perfect-scrollbar.css" rel="stylesheet">
+
+    <script src="js/jquery-1.9.1.js"></script>
+    <script src="js/jquery-ui-1.10.2.custom.js"></script>
+    <script src="js/jquery.mousewheel.js"></script>
+    <script src="js/perfect-scrollbar.js"></script>
+
+    <script src="openlayer/OpenLayers.js"></script>
+    <script src="js/openlayers.js"></script>
+
+    <script src="js/activity.js"></script>
+    <script src="js/people.js"></script>
+    <script src="js/content.js"></script>
+
+    <script type="text/javascript">
+      (function() {
+        var po = document.createElement('script');
+        po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/client:plusone.js?onload=render';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(po, s);
+      })();
+      function render() {
+        gapi.signin.render('gSignIn', {
+          'callback': 'onSignInCallback',
+          'clientid': '905547445747-2qppaicds6mhmttkdv38mgf6r3nfmuuj',
+          'cookiepolicy': 'single_host_origin',
+          'requestvisibleactions': 'http://schemas.google.com/AddActivity',
+          'scope': 'https://www.googleapis.com/auth/plus.login'
+        });
+      }
+    </script>
+    <script src="js/gapi.js"></script>
+    <!--<script src="http://www.google.com/jsapi?key=ABQIAAAAd-hs0KXlCbCt7FLKomCbWhSGdM5aa7OqfmfDlL3Jep-h9oAvaxQCUoKDTKrwiFmfrbkq1STOaQDisg"></script>-->
+    <!-- <script src="http://www.google.com/jsapi?key=AIzaSyAAf-vAJj39F-IixAqyb-3Hf7EPAJOumzw"></script> -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAf-vAJj39F-IixAqyb-3Hf7EPAJOumzw&sensor=true"></script>
+    <link rel="stylesheet" href="streetview/streetview.css">
+    <script src="streetview/streetview.js"></script>
+  </head>
+  <body>
+
+    <div id="courtain" class="responsiveFont">
+      <h1>Redes</h1>
+      <span></span>
+    </div>
+    <a href="" class="scrollHome" title="Scroll to Map"></a>
+    <a href="" class="toggleActivity toggleShow" title="Show activity"></a>
+
+    <div id="sidebar">
+      <div id="sideMain">
+        <div class="logo"><span>Redes</span></div>
+        <div id="tabMain">
+          <div id="peopleBtnTab" class="btnTab">
+            <img src="img/system/people.png"></img>
+          </div>
+          <div id="searchBtnTab" class="btnTab">
+            <img src="img/system/search.png"></img>
+          </div>
+        </div>
+        <div id="peopleSearchContent" class="contentHolder">
+          <div id="peopleSearch" class="content">
+            <div id="inputSearchContent">
+              <input id="inputSearchClientId" class="input-search" placeholder="Search people"></input>
+              <span class="btn-clear-peopleSearch"></span>
+            </div>
+          </div>
+        </div>
+        <div id="peopleListContent" class="contentHolder">
+          <div id="peopleList" class="content"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="titleActivity">
+      <a href="" class="homeActivity"></a>
+      <a href="" class="unselectMessages" title="Unselect all messages"></a>
+      <a href="">Timeline</a>
+      <a href="" class="toggleActivity toggleBack" title="hide activity"></a>
+    </div>
+    <div id="sideActivity" class="contentHolder">
+      <ul id="activity" class="content feeds"></ul>
+    </div>
+
+  <div id="omnibarMenu">
+    <div id="gSignOut" class="gSign">
+      <div class="name">
+        <span class="first-name">Sign in</span>
+        <span class="last-name">Google+</span>
+      </div>
+      <div id="gDisconnectBtn" class="gAvatar GPlusSignOut"></div>
+    </div>
+    <!-- Sign In -->
+    <div id="gSignIn" class="gSign">
+      <div class="name">
+        <span class="first-name">Sign in</span>
+        <span class="last-name">Google+</span>
+      </div>
+      <div id="gConnectBtn" class="gAvatar GPlusSignIn">
+        <span class="googleBrand"></span>
+      </div>
+    </div>
+  </div>
+
+  <div id="wrapper">
+    <div class="contentHolder main">
+      <div id="content" class="content main">
+        <div id="map" style="width:500px; height:500px">
+          <a href="" class="toggleStreetView streetview" title="Show streetView"></a>
+          <div id="streetview" class="streetview">
+            <div id="pano"></div>
+            <div id="map-container">
+              <div id="mapstreet"></div>
+            </div>
+          </div>
+        </div>
+        <div id="images"></div>
+      </div>
+    </div>
+  <div>
+
+</body>
+</html>

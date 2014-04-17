@@ -1,0 +1,116 @@
+Robin Giles Ribera
+
+Desarrolo de aplicaciones telemáticas 2013
+Nombre de su cuenta en el laboratorio: robin
+Práctica: "Redes" DAT URJC 2013
+
+Básico   URL => http://youtu.be/fzIChVypGCs
+Opcional URL => http://youtu.be/onScX7KMIXQ
+
+===================================================
+
+PARTE BÁSICA
+  En principio el usuario empieza viendo una cortina con el logotipo "Redes"
+  dando click en cualquier parte de la pantalla pasará a proceso del "logueo".
+
+  La panatalla se divide en tres secciones: PeopleBar, ActivityBar, Content.
+
+  COLUMNA PEOPLE BAR
+  Tenemos dos iconos: People y Search.
+  En "Search" se debería buscar un ID y encontrar perfiles para añadir a nuestra lista People, donde podemos eliminarlos. Todo estos cambios interactúan con LocalStorage.
+
+  COLUMNA ACTIVITY
+  Tenemos los botones: "Home", "Messages", el título "Timeline" y "Back"
+
+  El botón "Home" nos muestra nuestro perfil de google+.
+  El botón "Messages" deselecciona todos mensages.
+  El botón "Toggle" oculta la columna activity, e inmediatamente aparece el botón opuesto a esta acción
+  Luego podemos observar la lista de mensages.
+
+  Todo estos cambios interactúan con LocalStorage en "paralelo" con la api de google plus.
+
+  CONTENT
+  Podemos observar el "Mapa", y acontinuación de éste observaríamos las fotos de flickr ( si están disponibles con un scroll horizontal).
+
+  Si seleccionamos una persona, inmediatamente se nos muestra en el mapa todos los mensajes
+  que lleven coordenas de localización tal y como se describe en la parte básica. 
+  Además deberíamos observar popups con el mensaje en cuestión. Solo 
+  si damos click en un mensaje se ajusta el zoom del mapa al máximo.
+
+  Las fotos de flickr aparecen al lado del mapa, se muestran de forma horizontal. La
+  información dada por nominatim la utilizamos para nuestra búsqueda con flickr.
+  Cuando miramos las fotos de flickr aparece un botón para volver al mapa.
+
+  URL => http://youtu.be/fzIChVypGCs
+
+=========================================================
+
+PARTE ADICIONAL
+  
+  Podríamos diferenciar 4 partes:
+    1. La diseño de la interfaz, tanto css3 y jquery, La idea es que los elementos se adapten
+      a la pantalla (Responsive Design) y que todas las características se puedan observar en la 
+      dimensión actual de la pantalla.
+      Para este objetivo hemos usado las siguientes herramientas:
+      - PerfectScrollBar y mousewheel jquery: (http://noraesae.github.io/perfect-scrollbar/)
+        (http://archive.plugins.jquery.com/project/mousewheel)
+        Además de dar un todo de distinción a nuestro scrollbar, nos ayuda a tener elementos "fijos"
+        y siempre visibles, pero con scrollbar.
+        Con mousewheel conseguimos que nuestro conenido de imágenes se pueda observar de forma horizontal.
+
+      - La barra de Mensajes se puede ocultar, esto obliga al mapa a "Adaptarse" tanto en tamaño
+        como en la posición relativa de su funcionamiento, por ello constantemente usamos la función "render" de openlayer (http://openlayers.org/dev/examples/teleportation.html).
+
+      - Si hay fotos servidas con flickr y por ejemplo la lista es inacabable, podemos dar al
+        botón que aparecerá cuando miramos las fotos en la parte superior derecha <-(La flecha) para
+        volver al mapa.
+
+      - Luego usamos las fuentes "Lobster" (para el logotipo) e "iconFont" (un pack que nos funciona
+        como iconos, además de la ventaja de ser más fácil y muy escalables).
+
+      - Por último tenemos "La Cortina", Cuando no estamos logueados la veremos todo el tiempo, 
+        mostrando una transición infinita con CSS3 (rotar Xdeg, escalado y con un pegueño
+        efecto opacity).
+
+    2. People Search. Si en lugar de buscar por ID buscamos por algún nombre (pej, NASA) mostramos
+      también usuarios relacionados (Usamos la propia API de google+).
+      Luego tenemos una funcionalidad menor y es que tanto la lista de personas como las actividades
+      usan "LocalStorage" en paralelo con la api, así conseguimos una mejor sensasión de rendimiento.
+
+    3. Street View V3 ("El icono Ojo del mapa"). Cuando tenemos mensajes con infomación de localización
+      podemos utilizar street View para observar "lugares cercanos" a esta dirección. Pero solo se 
+      debería usar cuando tenemos un mensaje, marker o popup activado, cuando hay varios seleccionados
+      simplemente muestra la última dirección seleccionada. Si no hay ningún mensaje nos manda al Gran
+      Cañon del Colorado.
+      Además el panorama streetView es redimensionable, en la esquena Sur Oeste tenemos el icono
+      que redimensiona el mapa.
+
+      * El uso de esta funcionalidad obligó a borrar las capas de google maps con open layer por conflictos que no he podido resolver.*
+      * La versión 2 de los mapas de google la he eliminado (en el archivo está comentado el código de 
+      la versión 2 que antes usaba, no he querido elimnarlo porque llevó mucho tiempo):
+        - La V2 tenía la desventaja de usar flash.
+        - Pero con la V3 la funcionalidad que perdemos es el poder usarlo en fullscreen, después 
+          ganamos en sencillez y rendimiento.
+        - Además la v3 es más preciso en cuanto a las coordenas de localización.
+
+    4. Por último usamos Oauth para la autentificación con googleplus (conectarse y desconectarse).
+      En el objeto "googleG" tenemos toda la iteración con la API de googleplus.
+      No he podido encontrar la manera de usar streetview con oauth, por eso el código de streetview
+      está aparte.
+
+  URL => http://youtu.be/j3Vc9WF3hpo
+
+==============================================================
+
+Tenemos Los siguientes ficheros javascript:
+  js/people.js     -> Toda la lógica y funciones de la barra People y el Login.
+  js/activity.js   -> Toda la lógica de la Actividad.
+  js/content.js    -> Redimensionado de elementos, mapa, scroll, steetview, etc.
+  js/gapi.js       -> La api de google.
+  js/openlayer.js  -> Openlayer, nominatim, flickr.
+  streetview/streetview.js -> La funciones de Street View
+
+Estilos css:
+  css/style.css
+  css/openlayer.css
+  streetview/streetview.css
